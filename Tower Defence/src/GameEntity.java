@@ -11,6 +11,8 @@ public abstract class GameEntity extends GameField{
 	protected int posX;	
 	protected int posY;
 	protected BufferedImage image;		//everything has a texture
+	
+	
 	public BufferedImage loadImage(String path) {
 		try {	//just in case there is error
 			return ImageIO.read(ImageLoader.class.getResource(path));	//this is a image
@@ -20,15 +22,19 @@ public abstract class GameEntity extends GameField{
 		}
 		return null;
 	}
-	public void setImage(String path) {
-		this.image = loadImage(path);
-	}
+	
 	public GameEntity() {
 		
 	}
 	public GameEntity(int posX,int posY) {
 		this.posX = posX;
 		this.posY = posY;
+	}
+	public void setImage(String path) {
+		this.image = loadImage(path);
+	}
+	public void crop(int x,int y,int width,int height) {
+		this.image = this.image.getSubimage(x, y, width, height);
 	}
 	public int getX() {
 		return this.posX;

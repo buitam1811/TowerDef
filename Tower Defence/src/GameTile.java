@@ -12,11 +12,14 @@ public class GameTile extends GameEntity{
 		}
 		graphic = (Graphics2D) bs.getDrawGraphics();
 		
-		graphic.clearRect(0, 0, SCREEN_WIDTH*BLOCK_WIDTH,SCREEN_HEIGHT*BLOCK_HEIGHT );
 		
-		graphic.drawImage(this.image,0,0,SCREEN_WIDTH*BLOCK_WIDTH,SCREEN_HEIGHT*BLOCK_HEIGHT,null);
+		
+		graphic.drawImage(this.image,posX,posY,BLOCK_WIDTH,BLOCK_HEIGHT,null);
 		
 		graphic.dispose();
+	}
+	public static void show() {
+		//graphic.clearRect(0, 0, SCREEN_WIDTH*BLOCK_WIDTH,SCREEN_HEIGHT*BLOCK_HEIGHT ); //if this code activated then it gonna be messed up
 		bs.show();
 	}
 }
