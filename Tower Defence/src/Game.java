@@ -1,6 +1,6 @@
 
 
-public class Game implements Runnable{
+public class Game extends GameField implements Runnable{
 	
 	public int WIDTH,HEIGHT;
 	public String title;
@@ -9,8 +9,8 @@ public class Game implements Runnable{
 	private boolean running = false;
 	private Thread thread;
 	
-	
-	private GameEntity entity = new Road(0,0);
+	private int MAP_MATRIX = SCREEN_WIDTH*SCREEN_HEIGHT;
+	private GameTile tile[] = new GameTile[MAP_MATRIX];
 	int a[][] = new int[][]{
 						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -41,12 +41,27 @@ public class Game implements Runnable{
 	
 	private void init() {
 		GameField.display = new Display(title,WIDTH,HEIGHT);
-		entity.setImage("/textures/trish.jpg");
+		int count = 0;
+		for(int i=0;i<SCREEN_WIDTH;i++) {
+			for(int j=0;j<SCREEN_HEIGHT;j++) {
+				if(a[j][i] == 0) {
+					tile[count] = new Road(i*BLOCK_WIDTH,j*BLOCK_HEIGHT);
+					tile[count].setImage("textures/dirt.png");
+				}
+				else {
+					tile[count] = new Mountain(i*BLOCK_WIDTH,j*BLOCK_HEIGHT);
+					tile[count].setImage("textures/grass.jpg");
+				}
+				count++;
+			}
+		}
 	}
 	private void tick() {
 	}
 	private void render() {
-		entity.render();
+		for(int i = 0;i<MAP_MATRIX;i++) {
+			tile[i].render();
+		}
 	}
 	
 	public void run() {
@@ -59,6 +74,7 @@ public class Game implements Runnable{
 			if(f.nextRender()) {
 				render();
 				tick();
+				GameTile.show();
 			}
 			f.navigateFPS();
 		}
