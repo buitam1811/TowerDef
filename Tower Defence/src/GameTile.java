@@ -19,7 +19,7 @@ public class GameTile extends GameEntity{
 		graphic.dispose();
 	}
 	public static void show() {
-		graphic.clearRect(0, 0, SCREEN_WIDTH*BLOCK_WIDTH,SCREEN_HEIGHT*BLOCK_HEIGHT ); //if this code activated then it gonna be messed up
+		//graphic.clearRect(0, 0, SCREEN_WIDTH*BLOCK_WIDTH,SCREEN_HEIGHT*BLOCK_HEIGHT ); //if this code activated then it gonna be messed up
 		bs.show();
 	}
 }

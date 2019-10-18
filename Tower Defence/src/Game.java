@@ -9,18 +9,11 @@ public class Game extends GameField implements Runnable{
 	private boolean running = false;
 	private Thread thread;
 	
+	
 	private int MAP_MATRIX = SCREEN_WIDTH*SCREEN_HEIGHT;
 	private GameTile tile[] = new GameTile[MAP_MATRIX];
 	int a[][] = new int[][]{
-						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
-						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
-						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-						{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-						{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+						{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
 						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
@@ -32,6 +25,14 @@ public class Game extends GameField implements Runnable{
 						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
 						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
+						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+						{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+						{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+						{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
+						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,2},
 					};
 	public Game(String title,int width,int height) {
 		this.WIDTH = width;
@@ -48,9 +49,14 @@ public class Game extends GameField implements Runnable{
 					tile[count] = new Road(i*BLOCK_WIDTH,j*BLOCK_HEIGHT);
 					tile[count].setImage("textures/dirt.png");
 				}
-				else {
+				else if(a[j][i] == 1){
 					tile[count] = new Mountain(i*BLOCK_WIDTH,j*BLOCK_HEIGHT);
 					tile[count].setImage("textures/grass.jpg");
+				}
+				else {
+					tile[count] = new Spawner(i*BLOCK_WIDTH,j*BLOCK_HEIGHT);
+					tile[count].setImage("textures/door.png");
+					tile[count].crop(0,64*3,96,64);
 				}
 				count++;
 			}
