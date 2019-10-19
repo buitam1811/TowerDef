@@ -56,7 +56,7 @@ public class Game extends GameField implements Runnable{
 				else {
 					tile[count] = new Spawner(i*BLOCK_WIDTH,j*BLOCK_HEIGHT);
 					tile[count].setImage("textures/door.png");
-					tile[count].crop(0,64*3,96,64);
+					tile[count].crop(16,64*3,96-35,63);	//test fitting door to block
 				}
 				count++;
 			}
